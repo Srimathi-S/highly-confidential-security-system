@@ -8,7 +8,7 @@ import cryptography.AES;
 import model.UserDetails;
 
 public class UserDetailsRepository {
-	static HashMap<Integer,List<UserDetails>>userDetailsMap=new HashMap<>();
+	private static HashMap<Integer,List<UserDetails>>userDetailsMap=new HashMap<>();
 	static int totalUsers=userDetailsMap.size();
 	
 	public final boolean addUserDetails(UserDetails userDetails)
@@ -16,21 +16,21 @@ public class UserDetailsRepository {
 		UserRepository userRepository = new UserRepository();
 		int userId=userDetails.getUserId();
 		String secret=userRepository.getUser(userId).getEmail();
-		String name=AES.encrypt(userDetails.getNameOfConfidentialData(), secret);
+		String typeOfData=AES.encrypt(userDetails.getNameOfConfidentialData(), secret);
 		String requiredDetails=AES.encrypt(userDetails.getRequiredDetails(), secret);
 		
 		if(userDetailsMap.containsKey(userId))
 		{
 			List<UserDetails> userConfidentialDetailsList=userDetailsMap.get(userId);
 			int currentAdditionAt=userConfidentialDetailsList.size();
-			UserDetails toBeAdded=new UserDetails(userId,currentAdditionAt,name,requiredDetails);
+			UserDetails toBeAdded=new UserDetails(userId,currentAdditionAt,typeOfData,requiredDetails);
 			userConfidentialDetailsList.add(toBeAdded);
 			userDetailsMap.put(userId,userConfidentialDetailsList);
 		}
 		else
 		{
 			List<UserDetails> userConfidentialDetailsList=new ArrayList<>();
-			UserDetails toBeAdded=new UserDetails(userId,0,name,requiredDetails);
+			UserDetails toBeAdded=new UserDetails(userId,0,typeOfData,requiredDetails);
 			userConfidentialDetailsList.add(toBeAdded);
 			userDetailsMap.put(userId,userConfidentialDetailsList);
 			totalUsers++;
@@ -65,11 +65,11 @@ public class UserDetailsRepository {
 		
 		UserRepository userRepository = new UserRepository();
 		String secret=userRepository.getUser(userId).getEmail();
-		String name=AES.encrypt(userDetails.getNameOfConfidentialData(), secret);
+		String typeOfData=AES.encrypt(userDetails.getNameOfConfidentialData(), secret);
 		String requiredDetails=AES.encrypt(userDetails.getRequiredDetails(), secret);
 		List<UserDetails> userConfidentialDetailsList=userDetailsMap.get(userId);
 		if(dataId>=userConfidentialDetailsList.size())return false;
-		UserDetails toBeAdded=new UserDetails(userId,dataId,name,requiredDetails);
+		UserDetails toBeAdded=new UserDetails(userId,dataId,typeOfData,requiredDetails);
 		userConfidentialDetailsList.remove(dataId);
 		userConfidentialDetailsList.add(dataId, toBeAdded);
 		userDetailsMap.put(userId,userConfidentialDetailsList);
