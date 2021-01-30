@@ -3,7 +3,7 @@ package controller;
 import java.util.Scanner;
 
 
-public class UserDataMain {
+public class UserMain {
 	public static void main(String args[]) 
 	{
 		Scanner scanner=new Scanner(System.in);
@@ -28,7 +28,7 @@ public class UserDataMain {
 		boolean wantToContinue=false;
 		do
 		{
-		wantToContinue=ConfidentialDetailsMain.yourData(userId);
+		wantToContinue=UserDetailsMain.yourData(userId);
 		}while(wantToContinue);
 		System.out.println("Want to logout and login again(press y)/Just logout(press n)");
 		String yOrN=scanner.next();

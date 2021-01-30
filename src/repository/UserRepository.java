@@ -12,7 +12,6 @@ public class UserRepository {
 	private static List<User> userList=new ArrayList<User>();
 	private static Map<String,Integer> emailMap=new  HashMap<>();
 	private static int countOfUsers=0;
-	
 	public final int addUser(User user)
 	{
 		if(emailMap.containsKey(user.getEmail()))

@@ -4,7 +4,7 @@ import java.util.Scanner;
 import model.UserDetails;
 import repository.UserDetailsRepository;
 
-public class ConfidentialDetailsMain {
+public class UserDetailsMain {
 
 	public static boolean yourData(int userId) {
 		Scanner scanner=new Scanner(System.in);
@@ -14,7 +14,7 @@ public class ConfidentialDetailsMain {
 		int operation=scanner.nextInt();
 		if(operation==1)
 		{
-			userDetailsRepository.viewConfidentialDetails(userId);
+			userDetailsRepository.viewUserDetails(userId);
 		}
 		else if(operation==2)
 		{
@@ -47,7 +47,7 @@ public class ConfidentialDetailsMain {
 		String nameOfData =scanner.nextLine();
 		System.out.println("Required information");
 		String requiredInformation = scanner.nextLine();
-		boolean isEdited=userDetailsRepository.editConfidentialDetails(dataId,userId,new UserDetails(nameOfData,requiredInformation));
+		boolean isEdited=userDetailsRepository.editUserDetails(dataId,userId,new UserDetails(nameOfData,requiredInformation));
 		if(isEdited==true)System.out.println("Added successfully");
 		else System.out.println("Please give an appropriate number to edit");
 		
@@ -59,7 +59,7 @@ public class ConfidentialDetailsMain {
 		String nameOfData =scanner.nextLine();
 		System.out.println("Required information");
 		String requiredInformation = scanner.nextLine();
-		userDetailsRepository.addConfidentialDetails(new UserDetails(userId,0,nameOfData,requiredInformation));
+		userDetailsRepository.addUserDetails(new UserDetails(userId,0,nameOfData,requiredInformation));
 		System.out.println("Added successfully");
 	}
 	private static void deleteData(UserDetailsRepository userDetailsRepository,int userId)
@@ -67,7 +67,7 @@ public class ConfidentialDetailsMain {
 		Scanner scanner=new Scanner(System.in);
 		System.out.println("Enter the data number you want to delete");
 		int dataId=scanner.nextInt();
-		boolean isDeleted=userDetailsRepository.deleteConfidentialDetails(dataId,userId);
+		boolean isDeleted=userDetailsRepository.deleteUserDetails(dataId,userId);
 		if(isDeleted==true)System.out.println("Deleted successfully");
 		else System.out.println("Please give an appropriate number to delete");
 	}
