@@ -1,6 +1,6 @@
 package model;
 
-public class UserDetails {
+public class UserConfidentialDetails {
 	private int userId;
 	private int dataId;
 	private String nameOfConfidentialData;
@@ -30,12 +30,12 @@ public class UserDetails {
 		this.dataId = dataId;
 	}
 	
-	public UserDetails( String nameOfConfidentialData, String requiredDetails) {
+	public UserConfidentialDetails( String nameOfConfidentialData, String requiredDetails) {
 		this.nameOfConfidentialData = nameOfConfidentialData;
 		this.requiredDetails = requiredDetails;
 	}
 	
-	public UserDetails(int userId, int dataId, String nameOfConfidentialData, String requiredDetails) {
+	public UserConfidentialDetails(int userId, int dataId, String nameOfConfidentialData, String requiredDetails) {
 		this.userId = userId;
 		this.dataId = dataId;
 		this.nameOfConfidentialData = nameOfConfidentialData;
@@ -43,7 +43,7 @@ public class UserDetails {
 	}
 	
 	
-	public UserDetails( int dataId,String nameOfConfidentialData, String requiredDetails) {
+	public UserConfidentialDetails( int dataId,String nameOfConfidentialData, String requiredDetails) {
 		this.dataId=dataId;
 		this.nameOfConfidentialData = nameOfConfidentialData;
 		this.requiredDetails = requiredDetails;

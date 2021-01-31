@@ -1,35 +1,35 @@
 package controller;
 
 import java.util.Scanner;
-import model.UserDetails;
-import repository.UserDetailsRepository;
+import model.UserConfidentialDetails;
+import repository.UserConfidentialDetailsRepository;
 
 public class UserDetailsMain {
 
-	public static boolean yourData(int userId) {
+	public static boolean manipulateYourData(int userId) {
 		Scanner scanner=new Scanner(System.in);
-		UserDetailsRepository userDetailsRepository=new UserDetailsRepository();
+		UserConfidentialDetailsRepository userConfidentialDetailsRepository=new UserConfidentialDetailsRepository();
 		System.out.println("Enter the operation that you want to perform");
 		System.out.println("1.View your data\n2.Add new data\n3.Edit the data by specifying its number\n4. Delete the data\n");
 		int operation=scanner.nextInt();
 		if(operation==1)
 		{
-			userDetailsRepository.viewUserDetails(userId);
+			userConfidentialDetailsRepository.viewUserConfidentialDetails(userId);
 		}
 		else if(operation==2)
 		{
-			addData(userDetailsRepository,userId);
+			addData(userConfidentialDetailsRepository,userId);
 			
 		}
 		else if(operation==3)
 		{
 			System.out.println("Enter the data number you want to edit");
 			int dataId=scanner.nextInt();
-			editData(userDetailsRepository,userId,dataId);
+			editData(userConfidentialDetailsRepository,userId,dataId);
 		}
 		else if(operation==4)
 		{
-			deleteData(userDetailsRepository,userId);
+			deleteData(userConfidentialDetailsRepository,userId);
 		}
 		else
 		{
@@ -40,34 +40,34 @@ public class UserDetailsMain {
 		return toContinue.equalsIgnoreCase("Y");
 	}
 
-	private static void editData(UserDetailsRepository userDetailsRepository,int userId,int dataId) 
+	private static void editData(UserConfidentialDetailsRepository userConfidentialDetailsRepository,int userId,int dataId) 
 	{
 		Scanner scanner=new Scanner(System.in);
 		System.out.println("Enter the type of data");
 		String nameOfData =scanner.nextLine();
 		System.out.println("Required information");
 		String requiredInformation = scanner.nextLine();
-		boolean isEdited=userDetailsRepository.editUserDetails(dataId,userId,new UserDetails(nameOfData,requiredInformation));
+		boolean isEdited=userConfidentialDetailsRepository.editUserConfidentialDetails(dataId,userId,new UserConfidentialDetails(nameOfData,requiredInformation));
 		if(isEdited==true)System.out.println("Added successfully");
 		else System.out.println("Please give an appropriate number to edit");
 		
 	}
 
-	private static void addData(UserDetailsRepository userDetailsRepository,int userId) {
+	private static void addData(UserConfidentialDetailsRepository userConfidentialDetailsRepository,int userId) {
 		Scanner scanner=new Scanner(System.in);
 		System.out.println("Enter the type of data");
 		String nameOfData =scanner.nextLine();
 		System.out.println("Required information");
 		String requiredInformation = scanner.nextLine();
-		userDetailsRepository.addUserDetails(new UserDetails(userId,0,nameOfData,requiredInformation));
+		userConfidentialDetailsRepository.addUserConfidentialDetails(new UserConfidentialDetails(userId,0,nameOfData,requiredInformation));
 		System.out.println("Added successfully");
 	}
-	private static void deleteData(UserDetailsRepository userDetailsRepository,int userId)
+	private static void deleteData(UserConfidentialDetailsRepository userConfidentialDetailsRepository,int userId)
 	{
 		Scanner scanner=new Scanner(System.in);
 		System.out.println("Enter the data number you want to delete");
 		int dataId=scanner.nextInt();
-		boolean isDeleted=userDetailsRepository.deleteUserDetails(dataId,userId);
+		boolean isDeleted=userConfidentialDetailsRepository.deleteUserConfidentialDetails(dataId,userId);
 		if(isDeleted==true)System.out.println("Deleted successfully");
 		else System.out.println("Please give an appropriate number to delete");
 	}
