@@ -9,9 +9,8 @@ import model.UserConfidentialDetails;
 
 public class UserConfidentialDetailsRepository {
 	private static HashMap<Integer,List<UserConfidentialDetails>>userDetailsMap=new HashMap<>();
-	static int totalUsers=userDetailsMap.size();
 	
-	public final boolean addUserConfidentialDetails(UserConfidentialDetails userConfidentialDetails)
+	public boolean addUserConfidentialDetails(UserConfidentialDetails userConfidentialDetails)
 	{
 		UserRepository userRepository = new UserRepository();
 		int userId=userConfidentialDetails.getUserId();
@@ -33,15 +32,14 @@ public class UserConfidentialDetailsRepository {
 			UserConfidentialDetails toBeAdded=new UserConfidentialDetails(userId,0,typeOfData,requiredDetails);
 			userConfidentialDetailsList.add(toBeAdded);
 			userDetailsMap.put(userId,userConfidentialDetailsList);
-			totalUsers++;
 		}
 		printDetails(userId);
 		return true;
 	}
 	
-	public final void viewUserConfidentialDetails(int userId)
+	public void viewUserConfidentialDetails(int userId)
 	{
-		if(userId>=totalUsers)
+		if(!userDetailsMap.containsKey(userId))
 		{
 			System.out.println("No data yet");
 			return ;
@@ -60,7 +58,7 @@ public class UserConfidentialDetailsRepository {
 		
 	}
 	
-	public final boolean editUserConfidentialDetails(int dataId,int userId,UserConfidentialDetails userConfidentialDetails)
+	public boolean editUserConfidentialDetails(int dataId,int userId,UserConfidentialDetails userConfidentialDetails)
 	{
 		
 		UserRepository userRepository = new UserRepository();
