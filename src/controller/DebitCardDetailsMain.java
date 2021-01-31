@@ -36,7 +36,7 @@ public class DebitCardDetailsMain {
 		{
 			System.out.print("Please give an appropriate number");
 		}
-		System.out.println("Do you wish to continue with pan card(Y/N)");
+		System.out.println("Do you wish to continue with debit card(Y/N)");
 		String toContinue=scanner.next();
 		return toContinue.equalsIgnoreCase("Y");
 	}

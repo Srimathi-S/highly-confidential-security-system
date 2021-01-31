@@ -38,7 +38,7 @@ public class OtherConfidentialDetailsRepository  {
 	
 	public void viewUserConfidentialDetails(int userId)
 	{
-		if(!userDetailsMap.containsKey(userId))
+		if(!userDetailsMap.containsKey(userId) || userDetailsMap.get(userId).size()==0)
 		{
 			System.out.println("No data yet");
 			return ;

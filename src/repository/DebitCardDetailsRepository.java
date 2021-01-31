@@ -36,8 +36,8 @@ public class DebitCardDetailsRepository {
 		String secret=userRepository.getUser(userId).getEmail();
 		String number=AES.decrypt(debitCardDetails.getNumber(), secret);
 		String requiredDetails=AES.decrypt(debitCardDetails.getRequiredDetails(), secret);
-		String nameOnCard=AES.encrypt(debitCardDetails.getNameOnCard(), secret);
-		String cvv=AES.encrypt(debitCardDetails.getCvv(), secret);
+		String nameOnCard=AES.decrypt(debitCardDetails.getNameOnCard(), secret);
+		String cvv=AES.decrypt(debitCardDetails.getCvv(), secret);
 		System.out.println("Your debit card details");
 		System.out.println("Debit card number:"+number);
 		System.out.println("Name in debit card:"+nameOnCard);
