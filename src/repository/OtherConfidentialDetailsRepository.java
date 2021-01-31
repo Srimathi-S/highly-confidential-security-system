@@ -7,7 +7,7 @@ import java.util.List;
 import cryptography.AES;
 import model.UserConfidentialDetails;
 
-public class UserConfidentialDetailsRepository {
+public class OtherConfidentialDetailsRepository  {
 	private static HashMap<Integer,List<UserConfidentialDetails>>userDetailsMap=new HashMap<>();
 	
 	public boolean addUserConfidentialDetails(UserConfidentialDetails userConfidentialDetails)
@@ -15,21 +15,20 @@ public class UserConfidentialDetailsRepository {
 		UserRepository userRepository = new UserRepository();
 		int userId=userConfidentialDetails.getUserId();
 		String secret=userRepository.getUser(userId).getEmail();
-		String typeOfData=AES.encrypt(userConfidentialDetails.getNameOfConfidentialData(), secret);
+		String nameOfData=userConfidentialDetails.getNameOfConfidentialData();
 		String requiredDetails=AES.encrypt(userConfidentialDetails.getRequiredDetails(), secret);
 		
 		if(userDetailsMap.containsKey(userId))
 		{
 			List<UserConfidentialDetails> userConfidentialDetailsList=userDetailsMap.get(userId);
-			int currentAdditionAt=userConfidentialDetailsList.size();
-			UserConfidentialDetails toBeAdded=new UserConfidentialDetails(userId,currentAdditionAt,typeOfData,requiredDetails);
+			UserConfidentialDetails toBeAdded=new UserConfidentialDetails(userId,nameOfData,requiredDetails);
 			userConfidentialDetailsList.add(toBeAdded);
 			userDetailsMap.put(userId,userConfidentialDetailsList);
 		}
 		else
 		{
 			List<UserConfidentialDetails> userConfidentialDetailsList=new ArrayList<>();
-			UserConfidentialDetails toBeAdded=new UserConfidentialDetails(userId,0,typeOfData,requiredDetails);
+			UserConfidentialDetails toBeAdded=new UserConfidentialDetails(userId,nameOfData,requiredDetails);
 			userConfidentialDetailsList.add(toBeAdded);
 			userDetailsMap.put(userId,userConfidentialDetailsList);
 		}
@@ -50,7 +49,7 @@ public class UserConfidentialDetailsRepository {
 		int dataId=0;
 		for(UserConfidentialDetails userConfidentialDetails: confidentialDetailsList)
 		{
-			String name=AES.decrypt(userConfidentialDetails.getNameOfConfidentialData(), secret);
+			String name=userConfidentialDetails.getNameOfConfidentialData();
 			String data=AES.decrypt(userConfidentialDetails.getRequiredDetails(), secret);
 			System.out.println(dataId+"\t"+name+"\t"+data);
 			dataId++;
@@ -63,11 +62,11 @@ public class UserConfidentialDetailsRepository {
 		
 		UserRepository userRepository = new UserRepository();
 		String secret=userRepository.getUser(userId).getEmail();
-		String typeOfData=AES.encrypt(userConfidentialDetails.getNameOfConfidentialData(), secret);
+		String nameOfData=userConfidentialDetails.getNameOfConfidentialData();
 		String requiredDetails=AES.encrypt(userConfidentialDetails.getRequiredDetails(), secret);
 		List<UserConfidentialDetails> userConfidentialDetailsList=userDetailsMap.get(userId);
 		if(dataId>=userConfidentialDetailsList.size())return false;
-		UserConfidentialDetails toBeAdded=new UserConfidentialDetails(userId,dataId,typeOfData,requiredDetails);
+		UserConfidentialDetails toBeAdded=new UserConfidentialDetails(userId,nameOfData,requiredDetails);
 		userConfidentialDetailsList.remove(dataId);
 		userConfidentialDetailsList.add(dataId, toBeAdded);
 		userDetailsMap.put(userId,userConfidentialDetailsList);
@@ -77,24 +76,21 @@ public class UserConfidentialDetailsRepository {
 	{
 		System.out.println();
 		System.out.println("Printing all the confidential details");
+		int dataId=0;
 		for(UserConfidentialDetails userConfidentialDetails: userDetailsMap.get(userId))
 		{
-			System.out.println(userConfidentialDetails.getNameOfConfidentialData()+"\t"+userConfidentialDetails.getRequiredDetails());
+			System.out.println(dataId+"\t"+userConfidentialDetails.getNameOfConfidentialData()+"\t"+userConfidentialDetails.getRequiredDetails());
+			dataId++;
 		}
 		
 	}
 
-	public final boolean deleteUserConfidentialDetails(int dataId, int userId) 
+	public boolean deleteUserConfidentialDetails(int dataId, int userId) 
 	{
 		List<UserConfidentialDetails> userConfidentialDetailsList=userDetailsMap.get(userId);
 		if(dataId>=userConfidentialDetailsList.size())return false;
 		userConfidentialDetailsList.remove(dataId);
-		int totalDetails=userConfidentialDetailsList.size();
-		for(int number=dataId;number<totalDetails;number++)
-		{
-			userConfidentialDetailsList.get(dataId).setDataId(dataId);
-		}
-		
+		userDetailsMap.put(userId,userConfidentialDetailsList);
 		return true;
 	}
 }

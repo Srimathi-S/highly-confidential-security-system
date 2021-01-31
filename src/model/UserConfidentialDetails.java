@@ -2,7 +2,6 @@ package model;
 
 public class UserConfidentialDetails {
 	private int userId;
-	private int dataId;
 	private String nameOfConfidentialData;
 	private String requiredDetails;
 	public int getUserId() {
@@ -23,31 +22,19 @@ public class UserConfidentialDetails {
 	public void setRequiredDetails(String requiredDetails) {
 		this.requiredDetails = requiredDetails;
 	}
-	public int getDataId() {
-		return dataId;
-	}
-	public void setDataId(int dataId) {
-		this.dataId = dataId;
-	}
 	
 	public UserConfidentialDetails( String nameOfConfidentialData, String requiredDetails) {
 		this.nameOfConfidentialData = nameOfConfidentialData;
 		this.requiredDetails = requiredDetails;
 	}
 	
-	public UserConfidentialDetails(int userId, int dataId, String nameOfConfidentialData, String requiredDetails) {
+	public UserConfidentialDetails(int userId, String nameOfConfidentialData, String requiredDetails) {
 		this.userId = userId;
-		this.dataId = dataId;
 		this.nameOfConfidentialData = nameOfConfidentialData;
 		this.requiredDetails = requiredDetails;
 	}
 	
-	
-	public UserConfidentialDetails( int dataId,String nameOfConfidentialData, String requiredDetails) {
-		this.dataId=dataId;
-		this.nameOfConfidentialData = nameOfConfidentialData;
-		this.requiredDetails = requiredDetails;
-	}
+
 	
 	
 	
