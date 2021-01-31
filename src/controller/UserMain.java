@@ -28,7 +28,7 @@ public class UserMain {
 		boolean wantToContinue=false;
 		do
 		{
-		wantToContinue=UserDetailsMain.manipulateYourData(userId);
+		wantToContinue=UserConfidentialDetailsMain.manipulateYourData(userId);
 		}while(wantToContinue);
 		System.out.println("Want to logout and login again(press y)/Just logout(press n)");
 		String yOrN=scanner.next();

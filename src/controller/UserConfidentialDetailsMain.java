@@ -4,7 +4,7 @@ import java.util.Scanner;
 import model.UserConfidentialDetails;
 import repository.UserConfidentialDetailsRepository;
 
-public class UserDetailsMain {
+public class UserConfidentialDetailsMain {
 
 	public static boolean manipulateYourData(int userId) {
 		Scanner scanner=new Scanner(System.in);
