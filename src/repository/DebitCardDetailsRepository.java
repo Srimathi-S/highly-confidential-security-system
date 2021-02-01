@@ -8,7 +8,7 @@ import model.DebitCardDetails;
 
 public class DebitCardDetailsRepository {
 	private static HashMap<Integer,DebitCardDetails>debitCardDetailsMap=new HashMap<>();
-	public boolean addDebitCardDetails(DebitCardDetails debitCardDetails)
+	public final boolean addDebitCardDetails(DebitCardDetails debitCardDetails)
 	{
 		UserRepository userRepository = new UserRepository();
 		int userId=debitCardDetails.getUserId();
@@ -24,7 +24,7 @@ public class DebitCardDetailsRepository {
 	}
 	
 	
-	public void viewDebitCardDetails(int userId)
+	public final void viewDebitCardDetails(int userId)
 	{
 		if(!debitCardDetailsMap.containsKey(userId))
 		{
@@ -55,7 +55,7 @@ public class DebitCardDetailsRepository {
 		System.out.println("cvv of debit card:"+debitCardDetails.getCvv());
 		System.out.println("Other required details"+debitCardDetails.getRequiredDetails());
 	}
-	public boolean editDebitCardDetails(int userId,DebitCardDetails debitCardDetails)
+	public final boolean editDebitCardDetails(int userId,DebitCardDetails debitCardDetails)
 	{
 		if(!debitCardDetailsMap.containsKey(userId))
 		{
@@ -71,7 +71,7 @@ public class DebitCardDetailsRepository {
 		debitCardDetailsMap.put(userId, encryptedPanCardDetails);
 		return true;
 	}
-	public boolean deleteDebitCardDetails(int userId)
+	public final boolean deleteDebitCardDetails(int userId)
 	{
 		if(!debitCardDetailsMap.containsKey(userId))return false;
 		debitCardDetailsMap.remove(userId);

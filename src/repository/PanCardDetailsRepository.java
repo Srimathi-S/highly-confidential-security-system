@@ -6,7 +6,7 @@ import model.PanCardDetails;
 
 public class PanCardDetailsRepository{
 	private static HashMap<Integer,PanCardDetails>panCardDetailsMap=new HashMap<>();
-	public boolean addPanCardDetails(PanCardDetails panCardDetails)
+	public final boolean addPanCardDetails(PanCardDetails panCardDetails)
 	{
 		UserRepository userRepository = new UserRepository();
 		int userId=panCardDetails.getUserId();
@@ -22,7 +22,7 @@ public class PanCardDetailsRepository{
 	}
 	
 	
-	public void viewPanCardDetails(int userId)
+	public final void viewPanCardDetails(int userId)
 	{
 		if(!panCardDetailsMap.containsKey(userId))
 		{
@@ -54,7 +54,7 @@ public class PanCardDetailsRepository{
 		System.out.println("Address in pan card:"+panCardDetails.getAddress());
 		System.out.println("Other required details:"+panCardDetails.getRequiredDetails());
 	}
-	public boolean editPanCardDetails(int userId,PanCardDetails panCardDetails)
+	public final boolean editPanCardDetails(int userId,PanCardDetails panCardDetails)
 	{
 		if(!panCardDetailsMap.containsKey(userId))
 		{
@@ -70,7 +70,7 @@ public class PanCardDetailsRepository{
 		panCardDetailsMap.put(userId, encryptedPanCardDetails);
 		return true;
 	}
-	public boolean deletePanCardDetails(int userId)
+	public final boolean deletePanCardDetails(int userId)
 	{
 		if(!panCardDetailsMap.containsKey(userId))return false;
 		panCardDetailsMap.remove(userId);

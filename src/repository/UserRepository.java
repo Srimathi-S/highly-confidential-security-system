@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import cryptography.AES;
 import model.User;
 
@@ -42,17 +41,17 @@ public class UserRepository {
 	{
 		return emailMap.get(user.getEmail());
 	}
-	public final boolean isSignedUpUser(User user)
+	public final int isSignedUpUser(User user)
 	{
 		if(!emailMap.containsKey(user.getEmail()))
 		{
-			return false;
+			return -1;
 		}
 		Integer userId=emailMap.get(user.getEmail());
 		User userElement=userList.get(userId);
 		String decryptedPassword=AES.decrypt(userElement.getPassword(), userElement.getEmail());
-		if(decryptedPassword.equals(user.getPassword()))return true;
-		return false;
+		if(decryptedPassword.equals(user.getPassword()))return userId;
+		return -1;
 	}
 	
 	

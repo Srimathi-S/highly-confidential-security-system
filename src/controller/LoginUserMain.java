@@ -18,10 +18,11 @@ public class LoginUserMain {
 		String password = scanner.nextLine(); 
 		UserRepository userRepository = new UserRepository();
 		User user=new User(email,password);
-		if(userRepository.isSignedUpUser(user)) {
+		int isSignedUp=userRepository.isSignedUpUser(user);
+		if(isSignedUp!=-1) {
 			
-			System.out.println( "You are an active user"+userRepository.getUserId(user));
-			return userRepository.getUserId(user);
+			System.out.println( "You are an active user:"+userRepository.getUserId(user));
+			return isSignedUp;
 	
 		}
 	

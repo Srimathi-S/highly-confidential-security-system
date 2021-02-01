@@ -7,10 +7,10 @@ import java.util.List;
 import cryptography.AES;
 import model.UserConfidentialDetails;
 
-public class OtherConfidentialDetailsRepository  {
+public class UserConfidentialDetailsRepository  {
 	private static HashMap<Integer,List<UserConfidentialDetails>>userDetailsMap=new HashMap<>();
 	
-	public boolean addUserConfidentialDetails(UserConfidentialDetails userConfidentialDetails)
+	public final boolean addUserConfidentialDetails(UserConfidentialDetails userConfidentialDetails)
 	{
 		UserRepository userRepository = new UserRepository();
 		int userId=userConfidentialDetails.getUserId();
@@ -36,7 +36,7 @@ public class OtherConfidentialDetailsRepository  {
 		return true;
 	}
 	
-	public void viewUserConfidentialDetails(int userId)
+	public final void viewUserConfidentialDetails(int userId)
 	{
 		if(!userDetailsMap.containsKey(userId) || userDetailsMap.get(userId).size()==0)
 		{
@@ -57,7 +57,7 @@ public class OtherConfidentialDetailsRepository  {
 		
 	}
 	
-	public boolean editUserConfidentialDetails(int dataId,int userId,UserConfidentialDetails userConfidentialDetails)
+	public final boolean editUserConfidentialDetails(int dataId,int userId,UserConfidentialDetails userConfidentialDetails)
 	{
 		
 		UserRepository userRepository = new UserRepository();
@@ -85,7 +85,7 @@ public class OtherConfidentialDetailsRepository  {
 		
 	}
 
-	public boolean deleteUserConfidentialDetails(int dataId, int userId) 
+	public final boolean deleteUserConfidentialDetails(int dataId, int userId) 
 	{
 		List<UserConfidentialDetails> userConfidentialDetailsList=userDetailsMap.get(userId);
 		if(dataId>=userConfidentialDetailsList.size())return false;
